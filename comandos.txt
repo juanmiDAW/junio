@@ -137,6 +137,27 @@ Polimorfica:
 			{
 			    return $this->morphMany(Comentario::class, 'comentable');
 			}
+			
+	Carbon:
+		Carbon::now()->addDays(3); sumar dia
+		Carbon::now()->subHours(2); quitar horas
+		Carbon::now()->addMonth(); sumar meses
+		Carbon::now()->subYear(1); sumar año
+		
+		
+		$ahora = Carbon::now();         // Fecha y hora actual
+		$hoy = Carbon::today();         // Solo fecha actual (00:00:00)
+		$ayer = Carbon::yesterday();
+		$mañana = Carbon::tomorrow();
+		
+		$fecha1 = Carbon::parse('2025-06-20');
+		$fecha2 = Carbon::parse('2025-06-21');
+
+		$fecha1->lt($fecha2); // true (menor que)
+		$fecha1->gt($fecha2); // false (mayor que)
+		$fecha1->equalTo($fecha2); // false
+
+
 
 
 
