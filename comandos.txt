@@ -1,0 +1,115 @@
+BD:
+crear usuario BD: sudo -u postgres createuser -P nombreusuario
+
+crear BD: sudo -u postgres createdb -O usuario nombreBD
+
+conectar a  BD: psql -h localhost -U usuario -d basedatos
+
+Crear poyecto: composer create-project --prefer-dist laravel/laravel nombreProyecto
+Comando para crear proyecto laravel con la version 11: composer create-project laravel/laravel examen "^11.0"
+
+
+modificar .env
+
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=escuela
+DB_USERNAME=escuela
+DB_PASSWORD=escuela
+
+instalar npm: npm install
+
+Breeze:
+
+Instalar:
+
+composer require laravel/breeze --dev
+
+php artisan breeze:install
+
+hacer migraciones: php artisan migrate
+
+deshacer migraciones: php artisan migrate:rollback
+deshacer todas las migraciones: php artisan migrate:reset
+Elimina todas las migraciones y restura la base de datos: php artisan migrate:fresh
+
+
+entrar BD: php artisan db 
+
+correr servidor: composer run dev
+
+crear modelo con todo: php artisan make:model -cmrfs Nombre
+
+
+Consultas:
+Consultas INSERT INTO tabla ("campo1", "campo2") VALUES ('valor1', 'valor2');
+
+INSERT INTO tabla (columna_timestamp) VALUES ('2025-01-22 14:30:00');
+
+SELECT * FROM tabla;
+SELECT * FROM tabla; -- Obtiene todos los campos y registros
+SELECT columna1, columna2 FROM tabla; -- Obtiene campos específicos
+SELECT * FROM tabla WHERE columna = 'valor'; -- Filtra resultados
+SELECT * FROM tabla ORDER BY columna ASC; -- Ordena de forma ascendente
+SELECT * FROM tabla ORDER BY columna DESC; -- Ordena de forma descendente
+
+UPDATE tabla SET columna1 = 'nuevo_valor' WHERE condicion;
+UPDATE empleados SET salario = 3000 WHERE id = 5;
+
+DELETE FROM tabla WHERE condicion;
+DELETE FROM clientes WHERE id = 10;
+
+Asignacion masiva:
+protected $fillable = ['nombre', 'apellido'];
+protected $table = 'proyecciones'; Si la tabla no sigue con el convenio de laravel poner esto en el modelo
+
+
+Manipulacion de campos (eloquent)
+$variable = Modelo::where('columna', valor)->get(); Filtra por condicion de where
+$variable = Modelo::all(); Se obtienen todos los registros
+$variable = Modelo::orderBy('columna', 'asc'); Se ordena los resultados
+$variable = Modelo::take(numero);  coje n valores Limita el numero de valores
+
+
+comando copiar carpeta: cp -r carpeta_origen carpeta_destino
+
+Rutas:
+Route::get("/cliente/{id}/articulo", function($id){
+	return Cliente::find($id)->articulo;
+	
+Route::resource('articulos', ArticuloController::class);
+
+Zip
+Comprimir: zip -r archivo_comprimido.zip archivo_o_carpeta
+Descomprimir: unzip archivo_comprimido.zip
+
+Generar clave de encriptacion: php artisan key:generate
+
+Paginacion:
+en el controlador:
+$canciones = Cancion::with('albumes.artistas')->paginate(2);
+
+en la vista(para las pestañas):
+<div> {{ $canciones->links() }} <\div>
+
+Para que funcione tailwind con Livewire:
+en el fichero de tailwind.config.js se añade esta linea  './resources/*/.{html,js,php}',
+
+Pruebas:
+
+para crear las pruebas: php artisan make:test AlumnoTest
+para realizar los test: php artisan test
+
+Comandos de livewire: php artisan make:livewire BuscadorAlumnos
+
+
+
+
+
+
+
+
+
+
+
