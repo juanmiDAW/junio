@@ -104,7 +104,43 @@ para realizar los test: php artisan test
 Comandos de livewire: php artisan make:livewire BuscadorAlumnos
 
 
+Relaciones muchos a muchos:
+	crear migracion: php artisan make:migration create_role_user_table --create=role_user
+		$table->foreignId('role_id')->constrained();
+		
+	Modelo:
+		public function etiquetas()
+{
+    return $this->belongsToMany(Etiqueta::class);
+}
 
+	Añadir relaciones:$videojuego->etiquetas()->attach([1, 2, 3]); // añade relaciones
+	Quitar relaciones: $videojuego->etiquetas()->detach(2);
+	Acceder a campo extra: $videojuego->etiquetas()->withPivot('nombreCampoObtener')->get();
+	
+Polimorfica:
+	
+	migracion: para crear las columnas comentable_id, comentable_type hay que poner:
+		 $table->morphs('comentable');
+		 
+	en el propio modelo: en este caso comentario
+	class Comentario extends Model
+		{
+		    public function comentable()
+		    {
+			return $this->morphTo();
+		    }
+		}
+		
+	Modelos de videojuegos y noticia:
+		public function comentarios()
+			{
+			    return $this->morphMany(Comentario::class, 'comentable');
+			}
+
+
+
+	
 
 
 
